@@ -1,4 +1,6 @@
 import { Locator, Page } from "@playwright/test";
+import { loginData } from "../../testdata/loginData";
+import { InventoryPage } from "./InventoryPage";
 
 export class LoginPage {
 
@@ -16,13 +18,14 @@ export class LoginPage {
     async goToSite() {
         await this.page.goto("https://www.saucedemo.com/");
     }
-    async enterUsername(username: string) {
-        await this.username.fill(username);
+    async enterUsername() {
+        await this.username.fill(loginData.username);
     }
-    async enterPassword(password: string) {
-        await this.password.fill(password);
+    async enterPassword() {
+        await this.password.fill(loginData.password);
     }
     async clickLoginButton() {
         await this.loginBtn.click()
+        return new InventoryPage(this.page)
     }
 }
